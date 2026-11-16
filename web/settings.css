@@ -1,0 +1,110 @@
+/* Pluto-style settings composition with Forge typography and administrator palette. */
+#settings-workspace {
+  position:absolute; inset:4vh 3vw; display:flex; flex-direction:column;
+  background:color-mix(in srgb,var(--background) 94%,transparent);
+  border:1px solid var(--border); border-radius:5px; overflow:hidden;
+  pointer-events:auto; box-shadow:0 20px 100px #0006;
+}
+#settings-workspace[hidden]{display:none!important}
+body.settings-open aside{visibility:hidden}
+body.settings-open::before{background:rgba(0,0,0,.5)}
+#settings-workspace header{
+  display:flex;flex-shrink:0;gap:20px;height:62px;padding:0 24px;background:var(--panel)
+}
+#settings-workspace header span{font-size:11px;letter-spacing:1.2px;color:var(--text)}
+#settings-workspace header small{margin-left:auto;font-size:9px;color:var(--accent);letter-spacing:1px}
+#settings-workspace header button{font-size:11px;padding:8px 12px;width:auto;height:auto}
+.settings-tabs{
+  display:flex;flex-shrink:0;overflow-x:auto;background:var(--panel);
+  padding:0 14px 10px;gap:0;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;
+}
+.settings-tabs button{
+  white-space:nowrap;padding:15px 16px;border:0;border-radius:0;background:transparent;
+  color:var(--muted);font:700 12px 'Space Grotesk',sans-serif;text-transform:uppercase;
+}
+.settings-tabs button.active{color:var(--background);background:var(--accent)}
+.settings-columns{
+  display:grid;grid-template-columns:minmax(0,2.4fr) minmax(280px,1fr);
+  gap:16px;padding:16px;min-height:0;flex:1;
+}
+.settings-list{overflow:auto;min-width:0;scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
+.settings-list #submenu{display:grid;gap:2px;overflow:visible;padding:0}
+.settings-list .stack-setting,.settings-list .read-setting,.settings-list .preset-setting{
+  display:grid;grid-template-columns:minmax(130px,1fr) minmax(220px,350px);
+  gap:16px;align-items:center;min-height:56px;padding:11px 17px;margin:0;
+  border:1px solid transparent;border-radius:0;background:color-mix(in srgb,var(--panel) 85%,transparent);
+  transition:none;
+}
+.settings-list .stack-setting>strong,.settings-list .read-setting>strong,.settings-list .preset-setting>strong{
+  font:700 italic 14px 'Space Grotesk',sans-serif;text-transform:uppercase;line-height:1.35;
+}
+.settings-list .selected-setting{
+  background:color-mix(in srgb,var(--accent) 12%,#ffffff)!important;
+  color:#121214;border-color:transparent!important;
+}
+.setting-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;width:100%;grid-column:2}
+.setting-controls button{font-family:'Space Grotesk',sans-serif}
+.setting-controls .step-arrow{
+  flex:0 0 28px;min-width:28px;height:32px;padding:0;border:0;border-radius:2px;
+  background:transparent;color:var(--muted);font-size:26px;font-weight:500;line-height:1;
+}
+.setting-controls .step-arrow:hover{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.setting-controls .step-arrow:disabled{opacity:.25;cursor:default}
+.setting-controls .step-value{
+  flex:1;min-width:0;padding:7px 3px;border:0;border-radius:2px;background:transparent;
+  color:var(--text);text-align:center;font-size:16px;font-weight:700;font-style:italic;
+}
+.setting-controls:has(.segment-track) .step-value{flex:0 0 58px;text-align:right}
+.selected-setting .step-value,.selected-setting .step-arrow{color:#121214}
+.setting-controls button:disabled{cursor:default}
+.setting-controls:has(button:disabled):not(:has(.segment-track)) .step-value:disabled{opacity:.5}
+.segment-track{position:relative;flex:1;min-width:55px;height:28px;display:flex;align-items:center}
+.segment-bars{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:3px;width:100%;height:18px;pointer-events:none}
+.segment-bars i{display:block;width:auto;height:100%;margin:0;border-radius:2px;background:color-mix(in srgb,var(--muted) 20%,var(--card))}
+.segment-bars i.filled{background:var(--accent)}
+.segment-track input[type=range]{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.segment-track:focus-within{outline:2px solid var(--accent);outline-offset:3px}
+.segment-track:has(input:disabled){opacity:.4}
+.read-meter{grid-column:2;width:calc(100% - 100px);grid-row:1}
+.settings-list .read-setting{position:relative;cursor:pointer}
+.settings-list .read-value{grid-column:2;grid-row:1;text-align:right;padding-right:28px;font:700 italic 16px 'Space Grotesk',sans-serif;color:var(--text)}
+.settings-list .selected-setting .read-value{color:#121214}
+.settings-list .read-arrow{position:absolute;right:16px;color:var(--muted);font-size:14px;font-weight:400}
+.settings-list .read-setting:has(.read-meter) .read-value{padding-right:28px}
+.settings-list .read-setting small{display:none}
+.settings-list .stack-setting>small{grid-column:1/-1;color:var(--muted);font-size:10px;margin:0}
+.settings-details{
+  min-width:0;padding:22px;background:var(--panel);border:1px solid var(--border);border-radius:0;
+  overflow:auto;align-self:start;max-height:100%;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;
+}
+.settings-details .eyebrow{display:block;font-size:10px;letter-spacing:1px}
+.settings-details h2{font:700 italic 27px 'Space Grotesk',sans-serif;text-transform:uppercase;line-height:1.15;margin:12px 0;overflow-wrap:anywhere}
+.settings-details p{font-size:12px;line-height:1.8}
+.settings-details .detail-value{display:block;color:var(--accent);font:700 italic 25px 'Space Grotesk',sans-serif;margin:12px 0}
+.settings-details>.segment-bars{height:25px;margin:22px 0}
+.setting-badge{display:block;margin-top:20px;padding:12px;background:var(--card);color:var(--muted);font-size:9px;letter-spacing:.5px;line-height:1.6}
+.gta-settings-action{
+  display:block;width:100%;padding:13px;margin-top:22px;border:0;border-radius:2px;
+  background:var(--accent);color:var(--background);font-size:12px;font-weight:700;
+}
+.setting-choices{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.setting-choices button{padding:8px 10px;border-radius:2px;font-size:11px}
+.setting-choices button.active{background:var(--accent);color:var(--background);border-color:var(--accent)}
+.preset-summary{list-style:none;padding:0;display:grid;gap:5px}
+.preset-summary li{padding:10px;background:var(--card);font-size:11px}
+.settings-list .sub-action{min-height:56px;border-radius:0;text-transform:uppercase}
+.settings-list .sub-action:hover{transform:none;border-color:var(--accent)}
+@media(max-width:1200px){
+  .settings-columns{grid-template-columns:minmax(0,1.9fr) minmax(240px,1fr);padding:12px;gap:12px}
+  .settings-tabs button{padding:12px 11px;font-size:11px}
+  .settings-list .stack-setting,.settings-list .read-setting,.settings-list .preset-setting{grid-template-columns:minmax(125px,1fr) minmax(210px,260px);padding:10px 12px;gap:8px}
+  .setting-controls{gap:5px}.setting-controls .step-value{font-size:15px}
+  .settings-details{padding:18px}.settings-details h2{font-size:23px}
+}
+@media(max-width:900px){
+  .settings-columns{grid-template-columns:minmax(0,1fr) 230px}
+  .settings-list .stack-setting,.settings-list .read-setting,.settings-list .preset-setting{grid-template-columns:minmax(0,1fr)}
+  .setting-controls,.read-meter,.settings-list .read-value{grid-column:1;grid-row:2}
+  .settings-list .read-arrow{bottom:16px}
+  #settings-workspace header small{display:none}
+}
