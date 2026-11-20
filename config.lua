@@ -1,4 +1,5 @@
 Config = {}
+Config.VersionCheck = true
 
 -- Configuração do administrador. Nenhuma cor ou modo de mapa é salvo pelo jogador.
 Config.ServerName = 'FORGE ROLEPLAY'
